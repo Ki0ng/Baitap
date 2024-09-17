@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .product-card {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+    <form name="frm">
+        <p>
+            <label>
+                Image of product:
+                <input type="text" name="img_Name" id="img_Name" required>
+            </label>
+        </p>
+        <p>
+            <label>
+                Product name:
+                <input type="text" name="prd_Name" id="prd_Name" required>
+            </label>
+        </p>
+        <p>
+            <label>
+                New Price:
+                <input type="number" name="n_Prc" id="n_Prc" required>
+            </label>
+        </p>
+        <p>
+            <label>
+                Old Price:
+                <input type="number" name="o_Prc" id="o_Prc" required>
+            </label>
+        </p>
+
+        <p> Type:   
+            <label>
+                Nam
+                <input type="radio" name="type" value="Nam" required>
+                Nu
+                <input type="radio" name="type" value="Nu" required>
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Product Code:
+                <input type="text" name="prd_Code" id="prd_Code" required>
+            </label>    
+        </p>
+        
+        <p>
+            <button type="button" onclick="add()">Add</button>
+            <button type="button" onclick="cancel()">Cancel</button>
+        </p>
+    </form>
+
+    <div class="container mt-1">
+        <div class="card product-card" id="productCard" style="width:400px">
+            <img class="card-img-top" id="productImage" src="" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title" id="productName"></h4>
+                <p class="card-new-text" id="newPrice"></p>
+                <p class="card-old-text" id="oldPrice"></p>
+                <a href="#" class="btn btn-primary">Đặt Mua</a>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        
+        function add() {
+            var imgName = document.getElementById('img_Name').value;
+            var prdName = document.getElementById('prd_Name').value;
+            var nPrc = parseFloat(document.getElementById('n_Prc').value);
+            var oPrc = parseFloat(document.getElementById('o_Prc').value);
+            var type = document.querySelector('input[name="type"]:checked');
+
+            if (!imgName || !prdName || isNaN(nPrc) || isNaN(oPrc) || !type) {
+                alert("Please fill in all fields correctly.");
+                return;
+            }    
+
+            document.getElementById('productImage').src = imgName;
+            document.getElementById('productName').innerText = prdName;
+            document.getElementById('newPrice').innerText = nPrc + ' vnđ';
+            document.getElementById('oldPrice').innerHTML = '<s>' + oPrc + ' vnđ</s>';
+
+            document.getElementById('productCard').style.display = 'block';
+        }
+
+        function cancel() {
+
+            document.getElementById('productCard').style.display = 'none';
+        
+            document.getElementById('img_Name').value = '';
+            document.getElementById('prd_Name').value = '';
+            document.getElementById('n_Prc').value = '';
+            document.getElementById('o_Prc').value = '';
+            document.getElementById('productImage').src = '';
+            document.getElementById('productName').innerText = '';
+            document.getElementById('newPrice').innerText = '';
+            document.getElementById('oldPrice').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
